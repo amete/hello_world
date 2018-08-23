@@ -1,3 +1,6 @@
+mkdir -p build;
+cd build;
+
 if [ -z "$CXX" ]; then
     CXX=$(type -p g++)
 fi
