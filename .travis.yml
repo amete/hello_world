@@ -7,5 +7,10 @@ language: cpp
 notifications:
   email: on_failure
 
+branches:
+  only:
+    - master
+    - stable 
+
 script:
   - .travis-scripts/build-test.sh
