@@ -11,7 +11,7 @@ branches:
   only:
     - master
     - stable 
-    - coverity_scan
+#    - coverity_scan
 
 env:
   global:
@@ -28,7 +28,7 @@ addons:
       name: "amete/hello_world"
       description: "Testbed for Travis-CI thingzzz :)"
     notification_email: serhanmete@gmail.com
-    build_command_prepend: "mkdir -p build; cd build; $(type -p cmake) -DCMAKE_CXX_COMPILER=$(type -p g++) -DCMAKE_C_COMPILER=$(type -p gcc) .."
+    build_command_prepend: "mkdir -p coverity; cd coverity; $(type -p cmake) -DCMAKE_CXX_COMPILER=$(type -p g++) -DCMAKE_C_COMPILER=$(type -p gcc) .."
     build_command: "make -j"
     branch_pattern: coverity_scan
 
