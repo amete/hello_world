@@ -11,7 +11,7 @@ branches:
   only:
     - master
     - stable 
-#    - coverity_scan
+    - coverity_scan
 
 env:
   global:
