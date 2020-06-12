@@ -16,4 +16,3 @@ cmd="$CMAKE -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_C_COMPILER=$CC $CMAKE_EXTRA /mnt"
 echo $cmd
 $cmd
 make -j 4
-make test
