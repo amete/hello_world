@@ -28,4 +28,4 @@ jobs:
 
     # Build the project 
     - name: Build 
-      run: cmake --build . 
+      run: cmake --build build
