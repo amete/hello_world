@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        value: [a, b]
+        value: [ u20-dev ]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,15 +28,15 @@ jobs:
 
     # Pull the Docker image
     - name: Docker
-      run: docker pull hepsoftwarefoundation/u20-dev
+      run: docker pull hepsoftwarefoundation/${{ matrix.value }}
 
     # Run the build and test
     - name: Build and Test
-      run: docker run -e CXX=g++-9 -e CC=gcc-9 -v $(pwd):/mnt hepsoftwarefoundation/u20-dev /mnt/.travis-scripts/build-test.sh
+      run: docker run -e CXX=g++-9 -e CC=gcc-9 -v $(pwd):/mnt hepsoftwarefoundation/${{ matrix.value }} /mnt/.travis-scripts/build-test.sh
 
     # Testing
     - name: Test ${{ matrix.value }}
       run: echo "Serhan"
-      if: matrix.value == a
-      run: echo "Mete"
-      if: matrix.value == b
+      if: matrix.value == u20-dev
+      # run: echo "Mete"
+      # if: matrix.value == b
