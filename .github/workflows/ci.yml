@@ -36,8 +36,7 @@ jobs:
 
     # Testing
     - name: Test ${{ matrix.value }}
-      run: |
       if: matrix.value == a
-      echo "Serhan"
+      run: echo "Serhan"
       if: matrix.value == b
-      echo "Mete"
+      run: echo "Mete"
