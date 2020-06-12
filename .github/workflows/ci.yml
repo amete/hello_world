@@ -29,6 +29,4 @@ jobs:
     # Run the build and tes
     - name: Build and Test
       run: |
-        ls $GITHUB_WORKSPACE
-        ls $GITHUB_WORKSPACE/prmon
-        docker run -e CXX=g++-9 -e CC=gcc-9 -v $GITHUB_WORKSPACE/prmon:/mnt hepsoftwarefoundation/u20-dev /mnt/.travis-scripts/build-test.sh
+        docker run -e CXX=g++-9 -e CC=gcc-9 -v $GITHUB_WORKSPACE:/mnt hepsoftwarefoundation/u20-dev /mnt/.travis-scripts/build-test.sh
