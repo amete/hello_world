@@ -22,14 +22,10 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Configure the project 
-    - name: Configure 
-      run: mkdir build && cd build && cmake .. 
-
-    # Build the project 
-    - name: Build 
-      run: cmake --build build
-
-    # Check docker
+    # Get the docker image
     - name: Docker
-      run: which docker
+      run: docker pull hepsoftwarefoundation/u20-dev
+
+    # Build the project and run the tests
+    - name: Build and Test
+      run: docker run -e CXX=g++-9 -e CC=gcc-9 -v $(pwd):/mnt hepsoftwarefoundation/u20-dev /mnt/.travis-scripts/build-test.sh; fi
