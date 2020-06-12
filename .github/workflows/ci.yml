@@ -30,5 +30,6 @@ jobs:
     - name: Build and Test
       run: |
         uname -a
-        docker run hepsoftwarefoundation/u20-dev echo "Hello World"
+        echo $PWD
+        ls $PWD
         #docker run -e CXX=g++-9 -e CC=gcc-9 -v $GITHUB_WORKSPACE:/mnt hepsoftwarefoundation/u20-dev /mnt/.travis-scripts/build-test.sh
