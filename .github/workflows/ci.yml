@@ -1,5 +1,4 @@
 # This is a basic workflow to help you get started with Actions
-
 name: CI
 
 # Controls when the action will run. Triggers the workflow on push or pull request
@@ -38,5 +37,19 @@ jobs:
     # Run the build and test
     - name: Build and Test
       run: |
-        if [ "$DIMAGE" = hepsoftwarefoundation/c7-dev ];  then docker run -e CMAKE=cmake3 -e CMAKE_EXTRA=$CMAKE_EXTRA -v $(pwd):/mnt $DIMAGE scl enable devtoolset-8 /mnt/.travis-scripts/build-test.sh; fi
-        if [ "$DIMAGE" = hepsoftwarefoundation/u20-dev ]; then docker run -e CXX=g++-9 -e CC=gcc-9 -v $(pwd):/mnt $DIMAGE /mnt/.travis-scripts/build-test.sh; fi
+        if [ "$DIMAGE" = hepsoftwarefoundation/c7-dev ];  
+        then 
+          docker run -e CMAKE=cmake3 -e CMAKE_EXTRA=-DPYTHON_TEST=python2 -v $(pwd):/mnt $DIMAGE scl enable devtoolset-8 /mnt/.travis-scripts/build-test.sh;
+          docker run -e CMAKE=cmake3 -v $(pwd):/mnt $DIMAGE scl enable devtoolset-8 /mnt/.travis-scripts/build-test.sh;
+        elif [ "$DIMAGE" = hepsoftwarefoundation/c8-dev ];  
+        then 
+          docker run -v $(pwd):/mnt $DIMAGE /mnt/.travis-scripts/build-test.sh;
+        elif [ "$DIMAGE" = hepsoftwarefoundation/u18-dev ];  
+        then 
+          docker run -e CMAKE_EXTRA=-Dnlohmann_json_DIR=/usr/lib/cmake -v $(pwd):/mnt $DIMAGE /mnt/.travis-scripts/build-test.sh;
+        elif [ "$DIMAGE" = hepsoftwarefoundation/u20-dev ];  
+        then 
+          docker run -e CXX=g++-9 -e CC=gcc-9 -v $(pwd):/mnt $DIMAGE /mnt/.travis-scripts/build-test.sh; 
+        else
+          echo "Uknown DIMAGE $DIMAGE"
+        fi 
