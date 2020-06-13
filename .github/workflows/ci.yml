@@ -19,7 +19,7 @@ jobs:
     # Loop over all platforms
     strategy:
       matrix:
-        value: [ c8-dev, u20-dev ]
+        value: [ c8-dev ] #, u20-dev ]
 
     # Setup the enviroment variables
     env:
@@ -32,11 +32,16 @@ jobs:
 
     # Pull the Docker image
     - name: Docker
-      run: docker pull $DIMAGE
+      run: |
+        export SERHAN="SERHAN"
+        docker pull $DIMAGE
 
     # Run the build and test
     - name: Build and Test
       run: |
+        echo "=>> $SERHAN"
+        echo "=>> $SERHAN"
+        echo "=>> $SERHAN"
         if [ "$DIMAGE" == "hepsoftwarefoundation/c7-dev" ];
         then
           docker run -e CMAKE=cmake3 -e CMAKE_EXTRA=-DPYTHON_TEST=python2 -v $(pwd):/mnt $DIMAGE scl enable devtoolset-8 /mnt/.travis-scripts/build-test.sh;
