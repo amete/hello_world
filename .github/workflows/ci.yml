@@ -22,6 +22,10 @@ jobs:
       matrix:
         value: [ c8-dev, u20-dev ]
 
+    # Setup the enviroment variables
+    env:
+      DIMAGE: hepsoftwarefoundation/${{ matrix.value }}
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -29,12 +33,10 @@ jobs:
 
     # Pull the Docker image
     - name: Docker
-      run: docker pull hepsoftwarefoundation/${{ matrix.value }}
+      run: docker pull $DIMAGE 
 
     # Run the build and test
     - name: Build and Test
-      run: docker run -v $(pwd):/mnt hepsoftwarefoundation/${{ matrix.value }} /mnt/.travis-scripts/build-test.sh
-      if: matrix.value == 'c8-dev'
-    - name: Build and Test
-      run: docker run -e CXX=g++-9 -e CC=gcc-9 -v $(pwd):/mnt hepsoftwarefoundation/${{ matrix.value }} /mnt/.travis-scripts/build-test.sh
-      if: matrix.value == 'u20-dev'
+      run: |
+        if [ "$DIMAGE" = hepsoftwarefoundation/c7-dev ];  then docker run -e CMAKE=cmake3 -e CMAKE_EXTRA=$CMAKE_EXTRA -v $(pwd):/mnt $DIMAGE scl enable devtoolset-8 /mnt/.travis-scripts/build-test.sh; fi
+        if [ "$DIMAGE" = hepsoftwarefoundation/u20-dev ]; then docker run -e CXX=g++-9 -e CC=gcc-9 -v $(pwd):/mnt $DIMAGE /mnt/.travis-scripts/build-test.sh; fi
