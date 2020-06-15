@@ -24,7 +24,6 @@ jobs:
     # Setup the enviroment variables
     env:
       PLATFORM: ${{ matrix.value }}
-      DIMAGE: hepsoftwarefoundation/${{ matrix.value }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -37,7 +36,10 @@ jobs:
         echo "::set-env name=DIMAGE::hepsoftwarefoundation/$OS"
         if [ "$PLATFORM" == *_py2 ]; 
         then
+          echo "SERHAN"
           echo "::set-env name=CMAKE_EXTRA::-DPYTHON_TEST=python2"
+        else
+          echo "METE"
         fi
       ## Pull the Docker image
       #- name: Docker
