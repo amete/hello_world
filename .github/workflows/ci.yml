@@ -32,7 +32,12 @@ jobs:
     - name: Setup Environment
       run: |
         NAME="${DIMAGE/_py2/}"
+        echo $DIMAGE
+        echo $NAME
         echo '::set-env name=DIMAGE::$NAME'
+      env:
+        DIMAGE: ${{ DIMAGE }}
+
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
