@@ -34,7 +34,8 @@ jobs:
     - name: Set selected color
       run: |
         echo '::set-env name=SELECTED_COLOR::green'
-        echo '::set-env name=DIMAGENEW::${DIMAGE/_py2/}'
+        NAME="${DIMAGE/_py2/}" 
+        echo '::set-env name=DIMAGENEW::$NAME'
       ## Pull the Docker image
       #- name: Docker
       #  run: |
