@@ -17,4 +17,4 @@ fi
 cmd="$CMAKE -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_C_COMPILER=$CC $CMAKE_EXTRA .."
 echo $cmd
 $cmd
-make -j 4
+make -j 4  
