@@ -32,9 +32,9 @@ jobs:
 
     - name: Set selected color
       run: |
-        #OS="${PLATFORM/_py2/}" 
+        #OS="${PLATFORM/_py2/}"
         echo "::set-env name=DIMAGE::hepsoftwarefoundation/${PLATFORM/_py2/}"
-        if [[ "$PLATFORM" == *_py2 ]]; 
+        if [[ "$PLATFORM" == *_py2 ]];
         then
           echo "SERHAN"
           echo "::set-env name=CMAKE_EXTRA::-DPYTHON_TEST=python2"
@@ -67,3 +67,11 @@ jobs:
         #else
         #  echo "Uknown DIMAGE $DIMAGE"
         #fi
+
+    # Test clang-tidy review
+    - uses: ZedThree/clang-tidy-review@v0.2.0
+     id: review
+
+    # If there are any comments, fail the check
+    - if: steps.review.outpus.total_comments > 0
+      run: exit 1
