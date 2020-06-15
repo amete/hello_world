@@ -26,6 +26,8 @@ jobs:
       PLATFORM: ${{ matrix.value }}
       DIMAGE: hepsoftwarefoundation/${{ matrix.value }}
       IS_PY2: ${{ contains( matrix.value, 'py2' ) }}
+      FLAG: >-
+        ${{ contains( matrix.value, 'py2' ) }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -41,7 +43,7 @@ jobs:
     # Run the build and test
     - name: Build and Test
       run: |
-        echo "=>> ${PLATFORM} ${DIMAGE} ${IS_PY2}"
+        echo "=>> ${PLATFORM} ${DIMAGE} ${IS_PY2} ${FLAG}"
         #if [ "$DIMAGE" == "hepsoftwarefoundation/c7-dev" ];
         #then
         #  docker run -e CMAKE=cmake3 -e CMAKE_EXTRA=-DPYTHON_TEST=python2 -v $(pwd):/mnt $DIMAGE scl enable devtoolset-8 /mnt/.travis-scripts/build-test.sh;
