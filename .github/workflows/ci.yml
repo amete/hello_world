@@ -33,13 +33,12 @@ jobs:
 
     - name: Set selected color
       run: |
-        echo '::set-env name=SELECTED_COLOR::green'
-        NAME="${DIMAGE/_py2/}" 
-        echo "$NAME"
-        echo "::set-env name=DIMAGENEW::$NAME"
-        echo "$SERHAN"
-      env:
-        SERHAN: "${DIMAGE/_py2/}"
+        OS="${PLATFORM/_py2/}" 
+        echo "::set-env name=DIMAGE::hepsoftwarefoundation/$OS"
+        if [ "$PLATFORM" == *_py2 ]; 
+        then
+          echo "::set-env name=CMAKE_EXTRA::-DPYTHON_TEST=python2"
+        fi
       ## Pull the Docker image
       #- name: Docker
       #  run: |
@@ -49,8 +48,7 @@ jobs:
     # Run the build and test
     - name: Build and Test
       run: |
-        NAME="${DIMAGE/_py2/}" 
-        echo "=>> ${PLATFORM} ${DIMAGE} ${NAME} ${SELECTED_COLOR} ${DIMAGENEW}"
+        echo "=>> ${PLATFORM} ${DIMAGE} ${CMAKE_EXTRA}"
         #if [ "$DIMAGE" == "hepsoftwarefoundation/c7-dev" ];
         #then
         #  docker run -e CMAKE=cmake3 -e CMAKE_EXTRA=-DPYTHON_TEST=python2 -v $(pwd):/mnt $DIMAGE scl enable devtoolset-8 /mnt/.travis-scripts/build-test.sh;
