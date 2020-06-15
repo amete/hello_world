@@ -32,8 +32,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Set selected color
-      run: echo '::set-env name=SELECTED_COLOR::green'
-      run: echo '::set-env name=DIMAGENEW::${DIMAGE/_py2/}'
+      run: |
+        echo '::set-env name=SELECTED_COLOR::green'
+        echo '::set-env name=DIMAGENEW::${DIMAGE/_py2/}'
       ## Pull the Docker image
       #- name: Docker
       #  run: |
