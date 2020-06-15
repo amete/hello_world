@@ -35,6 +35,7 @@ jobs:
         NAME="${DIMAGE/_py2/}"
         echo $NAME
         echo '::set-env name=DIMAGE::$NAME'
+        echo $DIMAGE
 
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
@@ -48,7 +49,8 @@ jobs:
     # Run the build and test
     - name: Build and Test
       run: |
-        echo "=>> ${PLATFORM} ${DIMAGE}"
+        echo '::set-env name=SERHAN::METE'
+        echo "=>> ${PLATFORM} ${DIMAGE} ${SERHAN}"
         #if [ "$DIMAGE" == "hepsoftwarefoundation/c7-dev" ];
         #then
         #  docker run -e CMAKE=cmake3 -e CMAKE_EXTRA=-DPYTHON_TEST=python2 -v $(pwd):/mnt $DIMAGE scl enable devtoolset-8 /mnt/.travis-scripts/build-test.sh;
