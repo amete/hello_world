@@ -34,7 +34,7 @@ jobs:
       run: |
         OS="${PLATFORM/_py2/}" 
         echo "::set-env name=DIMAGE::hepsoftwarefoundation/$OS"
-        if [ "$PLATFORM" == *_py2 ]; 
+        if [[ "$PLATFORM" == *_py2 ]]; 
         then
           echo "SERHAN"
           echo "::set-env name=CMAKE_EXTRA::-DPYTHON_TEST=python2"
