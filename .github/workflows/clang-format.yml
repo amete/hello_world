@@ -1,15 +1,10 @@
 name: Clang-Format
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: push
 
 jobs:
   clang-format:
     runs-on: ubuntu-latest
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-      #- uses: amete/clang-format-action@v0.1
+    - uses: amete/clang-format-action@v0.1
