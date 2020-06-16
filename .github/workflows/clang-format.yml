@@ -11,8 +11,16 @@ jobs:
 
     - name: Add a dummy text, commit and push
       run: |
-        git config --global user.email "clang-format@github-actions"
-        git config --global user.name "clang-format"
         echo "////SERHAN" >> $GITHUB_WORKSPACE/src/hello_world.cxx
-        git commit -a -m "Apply clang-format" || true
-        git push -u origin ${GITHUB_REF#*refs/heads/}
+        if ! git diff --quiet; then
+          echo "There are changes, committing and pushing..."
+          ## Setup the email and the name
+          #git config --global user.email "clang-format@github-actions"
+          #git config --global user.name "clang-format"
+          # Apply the changes
+          git commit -a -m "Apply clang-format" || true
+          # Push the changes
+          git push -u origin ${GITHUB_REF#*refs/heads/}
+        else
+          echo "There are no changes, all good!"
+        fi
