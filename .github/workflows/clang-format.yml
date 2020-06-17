@@ -7,20 +7,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      #- uses: amete/clang-format-action@v0.1
+    - name: Apply clang-format
+      id: formatting
+      uses: amete/clang-format-action@master
+      with:
+        style: 'Google'
+    - name: Get the output message
+      run: echo "${{ steps.formatting.outputs.message }}"
 
-    - name: Add a dummy text, commit and push
-      run: |
-        echo "////SERHAN" >> $GITHUB_WORKSPACE/src/hello_world.cxx
-        if ! git diff --quiet; then
-          echo "There are changes, committing and pushing..."
-          ## Setup the email and the name
-          #git config --global user.email "clang-format@github-actions"
-          #git config --global user.name "clang-format"
-          # Apply the changes
-          git commit -a -m "Apply clang-format" || true
-          # Push the changes
-          git push -u origin ${GITHUB_REF#*refs/heads/}
-        else
-          echo "There are no changes, all good!"
-        fi
+      #- name: Add a dummy text, commit and push
+      #  run: |
+      #    echo "////SERHAN" >> $GITHUB_WORKSPACE/src/hello_world.cxx
+      #    if ! git diff --quiet; then
+      #      echo "There are changes, committing and pushing..."
+      #      # Setup the email and the name
+      #      git config --global user.email "clang-format@github-actions"
+      #      git config --global user.name "clang-format"
+      #      # Apply the changes
+      #      git commit -a -m "Apply clang-format" || true
+      #      # Push the changes
+      #      git push -u origin ${GITHUB_REF#*refs/heads/}
+      #    else
+      #      echo "There are no changes, all good!"
+      #    fi
