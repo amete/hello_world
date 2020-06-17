@@ -9,5 +9,4 @@
 [ci-img]: https://github.com/amete/hello_world/workflows/CI/badge.svg?branch=master
 [ci-link]: https://github.com/amete/hello_world/actions?query=workflow%3ACI+branch%3Amaster
 
-
 Basic repository to test Travis CI thingzzz :) 
