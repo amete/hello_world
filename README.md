@@ -1,7 +1,6 @@
 # Hello World
 
-[![Build Status][build-img]][build-link]  [![License][license-img]][license-url]
-[![CI Status][ci-img]][ci-link]
+[![Build Status][build-img]][build-link]  [![License][license-img]][license-url]  [![CI Status][ci-img]][ci-link]
 
 [build-img]: https://travis-ci.org/amete/hello_world.svg?branch=master
 [build-link]: https://travis-ci.org/amete/hello_world
