@@ -1,6 +1,6 @@
-sudo: required 
+sudo: required
 
-dist: trusty 
+dist: trusty
 
 language: cpp
 
@@ -10,7 +10,7 @@ notifications:
 branches:
   only:
     - master
-    - stable 
+    - stable
 
 script:
   - .travis-scripts/build-test.sh

@@ -21,7 +21,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Here you can run your command 
+    # Here you can run your command
     - name: Run command
       run: |
         echo "Hello world!"
