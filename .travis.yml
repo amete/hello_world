@@ -1,4 +1,4 @@
-sudo: required 
+sudo: required
 
 dist: trusty
 
@@ -10,7 +10,7 @@ notifications:
 branches:
   only:
     - master
-    - stable 
+    - stable
 
 script:
   - .travis-scripts/build-test.sh

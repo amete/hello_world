@@ -1,0 +1,18 @@
+name: Clang-Format
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  clang-format:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Apply clang-format
+      id: formatting
+      uses: amete/clang-format-action@master
+      with:
+        style: 'Google'
+    - name: Get the output message
+      run: echo "${{ steps.formatting.outputs.message }}"
