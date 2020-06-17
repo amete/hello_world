@@ -16,54 +16,12 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Loop over all platforms
-    strategy:
-      matrix:
-        value: [ c7-dev_py2, c8-dev, u20-dev ]
-
-    # Setup the enviroment variables
-    env:
-      PLATFORM: ${{ matrix.value }}
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Set selected color
+    # Here you can run your command 
+    - name: Run command
       run: |
-        #OS="${PLATFORM/_py2/}"
-        echo "::set-env name=DIMAGE::hepsoftwarefoundation/${PLATFORM/_py2/}"
-        if [[ "$PLATFORM" == *_py2 ]];
-        then
-          echo "SERHAN"
-          echo "::set-env name=CMAKE_EXTRA::-DPYTHON_TEST=python2"
-        else
-          echo "METE"
-        fi
-      ## Pull the Docker image
-      #- name: Docker
-      #  run: |
-      #    if [ "$PLATFORM" == "c8-dev" ]; then export DIMAGE="SERHAN"; fi
-      #    #docker pull $DIMAGE
-
-    # Run the build and test
-    - name: Build and Test
-      run: |
-        echo "=>> ${PLATFORM} ${DIMAGE} ${CMAKE_EXTRA}"
-        #if [ "$DIMAGE" == "hepsoftwarefoundation/c7-dev" ];
-        #then
-        #  docker run -e CMAKE=cmake3 -e CMAKE_EXTRA=-DPYTHON_TEST=python2 -v $(pwd):/mnt $DIMAGE scl enable devtoolset-8 /mnt/.travis-scripts/build-test.sh;
-        #  docker run -e CMAKE=cmake3 -v $(pwd):/mnt $DIMAGE scl enable devtoolset-8 /mnt/.travis-scripts/build-test.sh;
-        #elif [ "$DIMAGE" == "hepsoftwarefoundation/c8-dev" ];
-        #then
-        #  docker run -v $(pwd):/mnt $DIMAGE /mnt/.travis-scripts/build-test.sh;
-        #elif [ "$DIMAGE" == "hepsoftwarefoundation/u18-dev" ];
-        #then
-        #  docker run -e CMAKE_EXTRA=-Dnlohmann_json_DIR=/usr/lib/cmake -v $(pwd):/mnt $DIMAGE /mnt/.travis-scripts/build-test.sh;
-        #elif [ "$DIMAGE" == "hepsoftwarefoundation/u20-dev" ];
-        #then
-        #  docker run -e CXX=g++-9 -e CC=gcc-9 -v $(pwd):/mnt $DIMAGE /mnt/.travis-scripts/build-test.sh;
-        #else
-        #  echo "Uknown DIMAGE $DIMAGE"
-        #fi
+        echo "Hello world!"
